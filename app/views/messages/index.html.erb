@@ -1,0 +1,28 @@
+<h2>All the news</h2>
+<div id="addNews">
+  <%= link_to 'Add a news', new_message_path, class: 'btn btn-success' %>
+</div>
+<table id="news" class="table table-responsive">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>title</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @allmessage.each{ |n| %>
+      <tr>
+        <td><%= n.created_at.strftime('%a, %d %b %Y %H:%M:%S') %></td>
+        <td><%= n.author == nil ? "Anonymous" : "#{n.author.first_name} #{n.author.last_name}" %></td>
+        <td><%= n.title.length > 100 ? n.title[0,100] : n.title  %></td>
+        <td>
+        <td>
+          <%= button_to "Remove", {:controller => :messages, :action => 'destroy', :id => n.id }, :method => :delete, class: 'btn btn-danger removeNews' %>
+          <%= link_to 'Edit', "/messages/#{n.id}/edit", class: 'btn btn-info' %>
+        </td>
+      </tr>
+  <% } %>
+  </tbody>
+</table>

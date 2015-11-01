@@ -1,0 +1,22 @@
+<h2>Add a news</h2>
+<div id="newsform" clss="col col-md-12">
+  <%= form_for(@message) do |n| %>
+      <div class="form-group">
+        <%= n.label :title %>
+        <%= n.text_field :title , class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= n.label :author %>
+        <%= n.collection_select(:author_id, Author.all, :id, :full_name, {}, {class: 'form-control'}) %>
+      </div>
+      <div class="form-group">
+        <%= n.label :description %>
+        <%= n.text_field :description , class: 'form-control'%>
+      </div>
+      <div class="form-group">
+        <%= n.label :content %>
+        <%= n.text_area :content , class: 'form-control',  rows: 12 %>
+      </div>
+      <%= n.submit "Publish", class: 'btn btn-success'%>
+  <% end %>
+</div>
